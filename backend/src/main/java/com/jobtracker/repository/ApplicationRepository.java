@@ -19,13 +19,8 @@ public interface ApplicationRepository extends JpaRepository<JobApplication, Lon
 
     List<JobApplication> findByUser(User user);
 
-    @Query("""
-        SELECT DISTINCT a
-        FROM JobApplication a
-        LEFT JOIN FETCH a.interviewRounds
-        WHERE a.user = :user
-    """)
-    List<JobApplication> findByUserWithRounds(@Param("user") User user);
+    @Query("select distinct a from JobApplication a left join fetch a.interviewRounds where a.user = :user")
+    List<JobApplication> findByUserWithInterviewRounds(@Param("user") User user);
 
     Optional<JobApplication> findByIdAndUser(Long id, User user);
 

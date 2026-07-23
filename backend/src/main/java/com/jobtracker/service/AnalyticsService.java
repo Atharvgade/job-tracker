@@ -7,6 +7,7 @@ import com.jobtracker.entity.User;
 import com.jobtracker.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,17 +17,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AnalyticsService {
 
     private final ApplicationRepository applicationRepository;
-@Transactional(readOnly = true)
+
     public AnalyticsResponseDto getAnalytics(User user) {
-    	List<JobApplication> applications =
-    	        applicationRepository.findByUserWithRounds(user);
+        List<JobApplication> applications = applicationRepository.findByUserWithInterviewRounds(user);
         long total = applications.size();
 
         Map<String, Long> countByStatus = new LinkedHashMap<>();

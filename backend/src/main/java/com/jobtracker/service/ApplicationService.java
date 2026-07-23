@@ -44,7 +44,7 @@ public class ApplicationService {
     }
 
     public List<ApplicationResponseDto> findAllUnpaged(User user) {
-        return applicationRepository.findByUser(user).stream().map(this::toDto).toList();
+        return applicationRepository.findByUserWithInterviewRounds(user).stream().map(this::toDto).toList();
     }
 
     public ApplicationResponseDto findById(User user, Long id) {
