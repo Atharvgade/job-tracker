@@ -1,23 +1,54 @@
-# Pipeline — Job Application Tracker
+# Job Application Tracker
 
-A full-stack job application tracker: a Kanban board for your pipeline (Applied → Interview → Offer → Rejected), interview round tracking, and an analytics dashboard on your conversion rates.
+A full-stack web application for tracking job applications, managing interview rounds, and analyzing job search performance through an interactive dashboard.
 
-**Stack:** Java 17, Spring Boot 3, Spring Security + JWT, Spring Data JPA, PostgreSQL (H2 for local dev) · React 18, Vite, Tailwind CSS, Recharts, React Router.
+I built this while I was in the middle of my own job search — I was tracking applications in a messy spreadsheet and got tired of it, so I decided to build something better and use it as a chance to properly learn Spring Boot alongside React.
+## Features
 
-## Quick start (no Docker, fastest way to see it running)
+- JWT Authentication & Authorization
+- Job Application Management
+- Interview Round Tracking
+- Analytics Dashboard
+- Kanban-style Application Board
+- Drag-and-Drop Status Updates
+- PostgreSQL / H2 Database Support
 
-### 1. Backend
-Requires Java 17+ and Maven.
+## Tech Stack
+
+**Backend**
+- Java 17
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- JWT
+
+**Frontend**
+- React
+- Vite
+- Tailwind CSS
+- Recharts
+
+**Database**
+- PostgreSQL
+- H2
+
+## Quick Start
+
+### Backend
 
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 
-The backend starts on `http://localhost:8080` and uses an embedded H2 database by default — no setup needed. Data persists to `backend/data/jobtracker.mv.db` between restarts.
+Runs on:
 
-### 2. Frontend
-Requires Node 18+.
+```text
+http://localhost:8080
+```
+
+### Frontend
 
 ```bash
 cd frontend
@@ -25,62 +56,34 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`, register an account, and start adding applications.
+Runs on:
 
-## Running with Docker Compose (Postgres instead of H2)
-
-```bash
-docker compose up --build
+```text
+http://localhost:5173
 ```
 
-This spins up Postgres, the Spring Boot backend, and an Nginx-served frontend build. Frontend at `http://localhost:5173`, backend at `http://localhost:8080`.
+## Screenshots
 
-## Switching the local backend from H2 to Postgres
 
-Set these environment variables before running `mvn spring-boot:run` (or put them in a `.env` and export them):
+### Add Application
+![Board](screenshots/Add Application.png)
 
-```bash
-export DB_URL=jdbc:postgresql://localhost:5432/jobtracker
-export DB_USERNAME=jobtracker
-export DB_PASSWORD=jobtracker
-export DB_DRIVER=org.postgresql.Driver
-```
+### Job Application Board
+![Board](screenshots/job dashboard.png)
 
-## Before deploying anywhere real
+### Analytics Dashboard
+![Analytics](screenshots/analytics.png)
 
-- Set `JWT_SECRET` to a long random value — the default in `application.yml` is a placeholder.
-- Set `CORS_ORIGINS` to your actual deployed frontend URL.
-- Point `VITE_API_URL` (frontend `.env`) at your deployed backend's `/api` path.
+### Login Page
+![Login](screenshots/login.png)
+## Key Highlights
 
-## API overview
+- Built a full-stack application using Spring Boot and React.
+- Implemented JWT-based authentication.
+- Developed analytics for interview and offer conversion rates.
+- Used JPA/Hibernate with optimized fetch queries.
+- Designed a Kanban-style job application workflow.
 
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/auth/register` | Create an account |
-| POST | `/api/auth/login` | Log in, returns a JWT |
-| GET | `/api/applications/all` | List all applications for the logged-in user |
-| POST | `/api/applications` | Create an application |
-| PUT | `/api/applications/{id}` | Update an application |
-| PATCH | `/api/applications/{id}/status` | Move an application to a new status |
-| DELETE | `/api/applications/{id}` | Delete an application |
-| POST | `/api/applications/{id}/interview-rounds` | Add an interview round |
-| PUT | `/api/applications/{id}/interview-rounds/{roundId}` | Update a round |
-| GET | `/api/analytics` | Conversion rates and stage counts |
+## Author
 
-All endpoints except `/api/auth/**` require an `Authorization: Bearer <token>` header.
-
-## Project structure
-
-```
-backend/    Spring Boot REST API (entities, repositories, services, controllers, JWT security)
-frontend/   React + Vite SPA (Kanban board, analytics dashboard, auth)
-docker-compose.yml
-```
-
-## Resume-ready talking points
-
-- JWT-based stateless authentication with Spring Security, including per-user data isolation (users can only ever see/modify their own applications — enforced at the repository query level, not just the UI)
-- DTO-based API design decoupled from JPA entities
-- Custom analytics endpoint aggregating conversion rates and weekly trends from raw application data
-- Drag-and-drop Kanban board built with native HTML5 DnD (no extra dependency)
-- Dockerized for one-command local deployment (Postgres + backend + frontend)
+**Atharv Sanjay Gade**
