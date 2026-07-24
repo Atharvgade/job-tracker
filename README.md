@@ -69,7 +69,7 @@ http://localhost:5173
 
 | Dashboard | Analytics |
 |------------|------------|
-| ![](screenshots/jobdashboard.png) | ![](screenshots/analytics.png) |
+| ![](screenshots/jobdashboard.png) | ![](screenshots/Analytics.png) |
 
 | Add Application | Login |
 |------------|------------|
