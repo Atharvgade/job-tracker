@@ -65,17 +65,15 @@ http://localhost:5173
 ## Screenshots
 
 
-### Add Application
-![Board](screenshots/Add Application.png)
+## Screenshots
 
-### Job Application Board
-![Board](screenshots/job dashboard.png)
+| Dashboard | Analytics |
+|------------|------------|
+| ![](screenshots/jobdashboard.png) | ![](screenshots/analytics.png) |
 
-### Analytics Dashboard
-![Analytics](screenshots/analytics.png)
-
-### Login Page
-![Login](screenshots/login.png)
+| Add Application | Login |
+|------------|------------|
+| ![](screenshots/addapplication.png) | ![](screenshots/login.png) |
 ## Key Highlights
 
 - Built a full-stack application using Spring Boot and React.
